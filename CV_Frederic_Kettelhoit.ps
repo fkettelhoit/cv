@@ -1,0 +1,167 @@
+%!PS-Adobe-2.0
+(This CV is a Postscript Quine.)
+(As a .ps file it reproduces itself.)
+(
+~ Frederic
+~ Kettelhoit
+- kettelhoit@gmail.com, github.com/fkettelhoit
+- Muellerstrasse 150, 13353 Berlin, Germany
+- German (Native), English (C2), French (C1), Italian (C1)
+
+~ About Me
+# 9 years of work experience, including deeply technical work & team leadership
+- I work efficiently & completed my university degrees in 50% of the regular time
+- Took on lead roles & team responsibility shortly after starting first job
+- Experience as Team Lead in a variety of heterogeneous tech stacks
+
+~ Experience
+# Creator of AssemblageDB (as part of technical PhD work): 11/2019-ongoing
+- Development & design of distributed document platform for backlinked hypertext
+- Development of KV store, distributed document/graph DB + search index in Rust
+- Development & UX design of document editor in Typescript & React
+# Team Lead Data, Talentbay/GraduGreat GmbH: 07/2020-03/2021
+- Coordination & development of external academic data sources
+- Communication with data partners, business stakeholders & freelancers
+- Academic data pipeline using Python, Databricks & Microsoft Academic Graph
+# Lead Backend Developer Java, Propertybase GmbH: 06/2013-07/2017
+- Code reviewer for all Java devs, manager for all part-time Java devs
+- Maintenance & extension of legacy Real Estate CRM in Salesforce/Apex
+- Development of custom Java to Salesforce/Apex toolchain & compiler
+- Development of CD/CI to deploy git branches to Salesforce
+# (Freelancing) Interaction Designer/Developer, Hermann Bock GmbH: 2016-2017
+- Interaction design of tablet-based control center for nursing care beds
+- Interaction design & REST API spec for visualisation of nursing care sensors
+# (Freelancing) Backend Developer Clojure, Onlinetouch.nl: 2012-2013
+- Development of recommendation engine using Clojure & Elasticsearch
+# (Freelancing) Mobile/Backend Developer, blue inspection body GmbH: 2012-2013
+- Development & spec of template-based medical audit checklist for Android
+- Development of audit report generator backend using Clojure
+
+~ Education
+# University of Kassel: PhD in Philosophy (of Mathematics/CS), 2018-ongoing
+- Thesis: "Wittgenstein on Contradiction & Computation"
+- Estimated completion: 10/2021, supervisor: Prof. Dr. Stefan Majetschak
+- 12 months research visit at the Wittgenstein Archives Bergen, Norway
+# Free University of Berlin (FU): BA Philosophy & French Philology, 2014-2018
+- Grade: 1,2 (97%, Philosophy), 2,2 (80%, French), 6 semesters, parallel with full time work
+# University of Munich (LMU): MSc Computer Science, 2011-2012
+- Grade: 1,32 (95%), in 2 instead of 4 semesters, in parallel with BSc Computer Science
+# University of Munich (LMU): BSc Media Informatics, 2009-2012
+- Grade: 1,58 (90%), in 5 instead of 6 semesters, in parallel with MSc Computer Science
+)
+(
+/!{def}def
+/~{exch}!
+/?{~ !}!
+/+{add}!
+/-{sub}!
+/@{get}!
+/${put}!
+/@@{getinterval}!
+/$${putinterval}!
+/#{length}!
+/.{pop}!
+/@?{anchorsearch}!
+/mv{moveto}!
+/typeface{findfont ~ scalefont setfont}!
+/clr{setgray}!
+
+/code ?
+/cv ?
+/p2 ?
+/p1 ?
+
+/top 810 !
+/marg 110 !
+/page [595 842]!
+
+<< /PageSize page >> setpagedevice
+
+/trim{/str ?
+    /out str # string ! /del 0 ! /blank false !
+    0 1 str # 1 -{/i ? str i @ /s ?
+        s 16#0a eq s 16#20 eq or{
+            blank{/del del 1 + !}{out i del - 16#20 $}ifelse
+            /blank true !
+        }{
+            out i del - str i @ $
+            /blank false !
+        }ifelse
+    }for
+    out 0 str # del - @@
+}!
+
+/parse{/str ?
+    /l 0 ! /r 0 ! /s 3 !
+    /out{[
+        s
+        l r gt{0}{r l -}ifelse
+        str l i l - @@
+    ]}!
+    mark
+    0 1 str #{/i ?
+        /rest str i str # i - @@ !
+        rest(~ )@?{. out ~ /l i ! /s 3 !}if .
+        rest(# )@?{. l r le{out ~ /l i !}if /r i ! /s 2 !}if .
+        rest(- )@?{. out ~ /l i ! /r i ! /s 1 !}if .
+    }for
+    /i str # !
+    out
+    counttomark array astore
+}!
+
+/render{
+    /y top !
+    .6 clr{
+        aload . /str ? /i ? /s ?
+        /font s 3 eq{33}{11}ifelse !
+        s 3 eq{/y y font .4 mul + !}if
+        s 2 eq{0 clr} if
+        s 1 eq{.4 clr}if
+        font s 1 eq{/Helvetica}{/Helvetica-Bold}ifelse typeface
+        /offset str 0 i @@ stringwidth . !
+        s 2 eq{/y y font - !}if
+        marg offset - y font - mv
+        str show /y y font 1.2 mul - !
+    }forall
+}!
+
+cv trim parse render
+
+/++{/r ? /l ?
+    /j l # r # + string !
+    j 0 l $$
+    j l # r $$
+    j
+}!
+
+/quine{
+    /c ?
+    /q <202928> c ++ <29> ++ ( dup cvx exec ) ++ !
+    .6 clr
+    /font 6 !
+    marg top mv
+    font /Courier typeface
+    (%!PS-Adobe-2.0) show
+    marg top font - mv
+    <28> p1 ++ <2920> ++ show
+    marg top font 2 mul - mv
+    <28> p2 ++ <2928> ++ show
+    /y 95 !
+    /l 0 !
+    /marg 20 !
+    0 1 q # 1 -{ /i ?
+        q i @( )0 @ eq i l - 140 gt and
+        i q # 1 - eq or{
+            marg y font - mv
+            q l i l - @@ show
+            /y y font - !
+            /l i !
+        }if
+    }for
+}!
+
+code trim quine
+
+showpage)
+dup cvx exec
